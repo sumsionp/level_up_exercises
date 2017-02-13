@@ -32,3 +32,15 @@ class Arrowhead
 end
 
 puts Arrowhead.classify(:northern_plains, :bifurcated)
+
+begin
+  Arrowhead.classify(:southern_plains, :bifurcated)
+rescue => e
+  puts "Unknown region raises: #{e.class}: #{e.message}"
+end
+
+begin
+  Arrowhead.classify(:northern_plains, :plain)
+rescue => e
+  puts "Unknown shape raises: #{e.class}: #{e.message}"
+end

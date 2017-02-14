@@ -16,6 +16,8 @@ class Robot
       @name = generate_name
     end
 
+    # TODO Move error handling out of initilize. It really belongs
+    # in the generate_name method.
     check_name_format
     check_name_collision
     @@registry << @name

@@ -1,4 +1,5 @@
 class NameCollisionError < RuntimeError; end
+class NameFormatError < RuntimeError; end
 
 class Robot
   attr_accessor :name
@@ -15,7 +16,8 @@ class Robot
       @name = generate_name
     end
 
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
+    check_name_format
+    check_name_collision
     @@registry << @name
   end
 
@@ -24,6 +26,20 @@ class Robot
     2.times { name << ('A'..'Z').to_a.sample }
     3.times { name << rand(10).to_s }
     name
+  end
+
+  def check_name_format
+    unless name =~ /[[:alpha:]]{2}[[:digit:]]{3}/
+      raise NameFormatError,
+        'Robot name should be 2 letters and 3 numbers. Ex: AA111'
+    end
+  end
+
+  def check_name_collision
+    if @@registry.include?(name)
+      raise NameCollisionError,
+        'Robot name is already in the registry'
+    end
   end
 end
 

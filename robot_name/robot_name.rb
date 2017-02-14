@@ -22,10 +22,10 @@ class Robot
   end
 
   def generate_name
-    name = ''
-    2.times { name << ('A'..'Z').to_a.sample }
-    3.times { name << rand(10).to_s }
-    name
+    temp_name = ''
+    2.times { temp_name << ('A'..'Z').to_a.sample }
+    3.times { temp_name << rand(10).to_s }
+    temp_name
   end
 
   def check_name_format

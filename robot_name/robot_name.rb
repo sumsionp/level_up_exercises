@@ -20,15 +20,10 @@ class Robot
   end
 
   def generate_name
-    "#{generate_char}#{generate_char}#{generate_num}#{generate_num}#{generate_num}"
-  end
-
-  def generate_char
-    ('A'..'Z').to_a.sample
-  end
-
-  def generate_num
-    rand(10)
+    name = ''
+    2.times { name << ('A'..'Z').to_a.sample }
+    3.times { name << rand(10).to_s }
+    name
   end
 end
 

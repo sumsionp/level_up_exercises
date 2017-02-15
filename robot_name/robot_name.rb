@@ -9,15 +9,7 @@ class Robot
   def initialize(args = {})
     @@registry ||= []
     @name_generator = args[:name_generator]
-
-    if @name_generator
-      @name = @name_generator.call
-    else
-      @name = generate_name
-    end
-
-    # TODO Move error handling out of initilize. It really belongs
-    # in the generate_name method.
+    @name = generate_name
     check_name_format
     check_name_collision
     @@registry << @name
@@ -25,8 +17,14 @@ class Robot
 
   def generate_name
     temp_name = ''
-    2.times { temp_name << ('A'..'Z').to_a.sample }
-    3.times { temp_name << rand(10).to_s }
+
+    if @name_generator
+      temp_name = @name_generator.call
+    else
+      2.times { temp_name << ('A'..'Z').to_a.sample }
+      3.times { temp_name << rand(10).to_s }
+    end
+
     temp_name
   end
 

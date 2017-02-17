@@ -29,7 +29,7 @@ class Robot
   def check_name_format
     unless name =~ /[[:alpha:]]{2}[[:digit:]]{3}/
       raise NameFormatError,
-        'Robot name should be 2 letters and 3 numbers. Ex: AA111'
+        "Robot name: #{name} should be 2 letters and 3 numbers. Ex: AA111"
     end
   end
 

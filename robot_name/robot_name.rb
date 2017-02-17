@@ -8,24 +8,22 @@ class Robot
 
   def initialize(args = {})
     @@registry ||= []
-    @name_generator = args[:name_generator]
-    @name = generate_name
-    check_name_format
-    check_name_collision
+    @name_generator = args[:name_generator] || proc { generate_name }
+    @name = @name_generator.call
+    check_name
     @@registry << @name
   end
 
   def generate_name
     temp_name = ''
-
-    if @name_generator
-      temp_name = @name_generator.call
-    else
       2.times { temp_name << ('A'..'Z').to_a.sample }
       3.times { temp_name << rand(10).to_s }
-    end
-
     temp_name
+  end
+
+  def check_name
+    check_name_format
+    check_name_collision
   end
 
   def check_name_format

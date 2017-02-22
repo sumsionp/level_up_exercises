@@ -1,19 +1,19 @@
 # Killer facts about triangles AWW YEAH
 class Triangle
-  attr_accessor :side1, :side2, :side3
+  attr_accessor :side_a, :side_b, :side_c
 
-  def initialize(side1, side2, side3)
-    @side1 = side1
-    @side2 = side2
-    @side3 = side3
+  def initialize(side_a, side_b, side_c)
+    @side_a = side_a
+    @side_b = side_b
+    @side_c = side_c
   end
 
   def equilateral
-    side1 == side2 && side2 == side3
+    side_a == side_b && side_b == side_c
   end
 
   def isosceles
-    [side1, side2, side3].uniq.length == 2
+    [side_a, side_b, side_c].uniq.length == 2
   end
 
   def scalene
@@ -34,7 +34,7 @@ class Triangle
   end
 
   def angles
-    calculate_angles(side1, side2, side3)
+    calculate_angles(side_a, side_b, side_c)
   end
 
   def right?
